@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<behavior name="Move_to_Home">
+
+	<executable package_path="ariac_flexbe_behaviors.move_to_home_sm" class="Move_to_HomeSM" />
+	<tagstring></tagstring>
+	<author>Stefan Roelands, Wouter de Saegher</author>
+	<date>Tue May 26 2020</date>
+	<description>
+		Robots en gantry naar Home bewegen
+	</description>
+
+
+	<!-- Contained Behaviors -->
+
+	<!-- Available Parameters -->
+
+</behavior>
