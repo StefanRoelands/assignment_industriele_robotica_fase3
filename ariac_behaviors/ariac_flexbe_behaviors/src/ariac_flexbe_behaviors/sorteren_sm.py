@@ -13,6 +13,8 @@ from ariac_flexbe_behaviors.move_to_home_sm import Move_to_HomeSM
 from ariac_flexbe_states.set_conveyorbelt_power_state import SetConveyorbeltPowerState
 from flexbe_states.wait_state import WaitState
 from ariac_flexbe_states.srdf_state_to_moveit_ariac_state import SrdfStateToMoveitAriac
+from ariac_support_flexbe_states.equal_state import EqualState
+from ariac_support_flexbe_states.add_numeric_state import AddNumericState
 # Additional imports can be added inside the following tags
 # [MANUAL_IMPORT]
 
@@ -48,7 +50,7 @@ class SorterenSM(Behavior):
 
 
 	def create(self):
-		# x:1222 y:168, x:482 y:174
+		# x:1648 y:487, x:482 y:174
 		_state_machine = OperatableStateMachine(outcomes=['finished', 'failed'])
 		_state_machine.userdata.config_name_gantry_Pre_Conv = 'Gantry_PreGrasp_Conv'
 		_state_machine.userdata.move_group = 'Gantry'
@@ -56,7 +58,10 @@ class SorterenSM(Behavior):
 		_state_machine.userdata.action_topic = '/move_group'
 		_state_machine.userdata.robot_name = ''
 		_state_machine.userdata.poweroff = 0
-		_state_machine.userdata.config_name_gantry_Pre_side = 'Gantry_PreGrasp_Right_bins_2'
+		_state_machine.userdata.config_name_gantry_Pre_Grasp_bin = 'Gantry_PreGrasp_Right_bins_2'
+		_state_machine.userdata.Partsaantal = 0
+		_state_machine.userdata.Partsvast = 6
+		_state_machine.userdata.Plus1 = 1
 
 		# Additional creation code can be added inside the following tags
 		# [MANUAL_CREATE]
@@ -112,15 +117,35 @@ class SorterenSM(Behavior):
 			# x:1040 y:126
 			OperatableStateMachine.add('Move to pre side',
 										SrdfStateToMoveitAriac(),
-										transitions={'reached': 'finished', 'planning_failed': 'retry_2', 'control_failed': 'retry_2', 'param_error': 'failed'},
+										transitions={'reached': 'Hier moet een behavior om te plaatsen', 'planning_failed': 'retry_2', 'control_failed': 'retry_2', 'param_error': 'failed'},
 										autonomy={'reached': Autonomy.Off, 'planning_failed': Autonomy.Off, 'control_failed': Autonomy.Off, 'param_error': Autonomy.Off},
-										remapping={'config_name': 'config_name_gantry_Pre_side', 'move_group': 'move_group', 'move_group_prefix': 'move_group_prefix', 'action_topic': 'action_topic', 'robot_name': 'robot_name', 'config_name_out': 'config_name_out', 'move_group_out': 'move_group_out', 'robot_name_out': 'robot_name_out', 'action_topic_out': 'action_topic_out', 'joint_values': 'joint_values', 'joint_names': 'joint_names'})
+										remapping={'config_name': 'config_name_gantry_Pre_Grasp_bin', 'move_group': 'move_group', 'move_group_prefix': 'move_group_prefix', 'action_topic': 'action_topic', 'robot_name': 'robot_name', 'config_name_out': 'config_name_out', 'move_group_out': 'move_group_out', 'robot_name_out': 'robot_name_out', 'action_topic_out': 'action_topic_out', 'joint_values': 'joint_values', 'joint_names': 'joint_names'})
 
 			# x:1034 y:271
 			OperatableStateMachine.add('retry_2',
 										WaitState(wait_time=0.2),
 										transitions={'done': 'Move to pre side'},
 										autonomy={'done': Autonomy.Off})
+
+			# x:1278 y:109
+			OperatableStateMachine.add('Hier moet een behavior om te plaatsen',
+										WaitState(wait_time=2),
+										transitions={'done': 'increase'},
+										autonomy={'done': Autonomy.Off})
+
+			# x:977 y:473
+			OperatableStateMachine.add('6 parts?',
+										EqualState(),
+										transitions={'true': 'finished', 'false': 'Camera moet hier'},
+										autonomy={'true': Autonomy.Off, 'false': Autonomy.Off},
+										remapping={'value_a': 'Partsvast', 'value_b': 'Partsaantal'})
+
+			# x:1233 y:370
+			OperatableStateMachine.add('increase',
+										AddNumericState(),
+										transitions={'done': '6 parts?'},
+										autonomy={'done': Autonomy.Off},
+										remapping={'value_a': 'Plus1', 'value_b': 'Partsaantal', 'result': 'Partsaantal'})
 
 
 		return _state_machine
