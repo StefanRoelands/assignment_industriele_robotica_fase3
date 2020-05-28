@@ -62,6 +62,7 @@ class SorterenSM(Behavior):
 		_state_machine.userdata.Partsaantal = 0
 		_state_machine.userdata.Partsvast = 6
 		_state_machine.userdata.Plus1 = 1
+		_state_machine.userdata.poweron = 100
 
 		# Additional creation code can be added inside the following tags
 		# [MANUAL_CREATE]
@@ -136,7 +137,7 @@ class SorterenSM(Behavior):
 			# x:977 y:473
 			OperatableStateMachine.add('6 parts?',
 										EqualState(),
-										transitions={'true': 'finished', 'false': 'Camera moet hier'},
+										transitions={'true': 'finished', 'false': 'Start conveyer'},
 										autonomy={'true': Autonomy.Off, 'false': Autonomy.Off},
 										remapping={'value_a': 'Partsvast', 'value_b': 'Partsaantal'})
 
@@ -146,6 +147,13 @@ class SorterenSM(Behavior):
 										transitions={'done': '6 parts?'},
 										autonomy={'done': Autonomy.Off},
 										remapping={'value_a': 'Plus1', 'value_b': 'Partsaantal', 'result': 'Partsaantal'})
+
+			# x:682 y:223
+			OperatableStateMachine.add('Start conveyer',
+										SetConveyorbeltPowerState(),
+										transitions={'continue': 'Camera moet hier', 'fail': 'failed'},
+										autonomy={'continue': Autonomy.Off, 'fail': Autonomy.Off},
+										remapping={'power': 'poweron'})
 
 
 		return _state_machine
