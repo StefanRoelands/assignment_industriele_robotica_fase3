@@ -38,7 +38,7 @@ class NotifyShipmentReadyState(EventState):
 			rospy.wait_for_service('/ariac/agv1')
 			NotifyShipmentReady = rospy.ServiceProxy('/ariac/agv1', AGVControl)
 		else:
-			if userdata.destination_id == 'agv2':
+			if userdata.agv_id == 'agv2':
 				rospy.wait_for_service('/ariac/agv2')
 				NotifyShipmentReady = rospy.ServiceProxy('/ariac/agv2', AGVControl)
 			else:
@@ -61,7 +61,6 @@ class NotifyShipmentReadyState(EventState):
 			userdata.message = None
 			return 'fail'
 
-
 	def on_enter(self, userdata):
 		# This method is called when the state becomes active, i.e. a transition from 
 		pass # Nothing to do in this example.
@@ -72,7 +71,6 @@ class NotifyShipmentReadyState(EventState):
 
 		pass # Nothing to do in this example.
 
-
 	def on_start(self):
 		# This method is called when the behavior is started.
 		# If possible, it is generally better to initialize used resources in the constructor
@@ -80,7 +78,6 @@ class NotifyShipmentReadyState(EventState):
 
 		# In this example, we use this event to set the correct start time.
 		pass # Nothing to do in this example.
-
 
 	def on_stop(self):
 		# This method is called whenever the behavior stops execution, also if it is cancelled.

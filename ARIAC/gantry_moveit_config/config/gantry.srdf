@@ -31,21 +31,21 @@
     </group>
     <!--GROUP STATES: Purpose: Define a named state for a particular group, in terms of joint values. This is useful to define states like 'folded arms'-->
     <group_state name="Left_Home" group="Left_Arm">
-        <joint name="left_elbow_joint" value="2.25" />
-        <joint name="left_shoulder_lift_joint" value="-0.50" />
+        <joint name="left_elbow_joint" value="1.88" />
+        <joint name="left_shoulder_lift_joint" value="-0.75" />
         <joint name="left_shoulder_pan_joint" value="0" />
-        <joint name="left_wrist_1_joint" value="-1.50" />
+        <joint name="left_wrist_1_joint" value="-1.15" />
         <joint name="left_wrist_2_joint" value="1.50" />
         <joint name="left_wrist_3_joint" value="0" />
     </group_state>
 
     <group_state name="Right_Home" group="Right_Arm">
-        <joint name="left_elbow_joint" value="2.25" />
-        <joint name="left_shoulder_lift_joint" value="-0.50" />
-        <joint name="left_shoulder_pan_joint" value="3.00" />
-        <joint name="left_wrist_1_joint" value="-1.50" />
-        <joint name="left_wrist_2_joint" value="1.50" />
-        <joint name="left_wrist_3_joint" value="0" />
+        <joint name="right_elbow_joint" value="1.88" />
+        <joint name="right_shoulder_lift_joint" value="-0.75" />
+        <joint name="right_shoulder_pan_joint" value="3.15" />
+        <joint name="right_wrist_1_joint" value="-1.15" />
+        <joint name="right_wrist_2_joint" value="1.50" />
+        <joint name="right_wrist_3_joint" value="0" />
     </group_state>
 
     <group_state name="Gantry_Home" group="Gantry">
@@ -62,50 +62,50 @@
 
     <group_state name="Gantry_PreGrasp_Left_bins_1" group="Gantry">
         <joint name="small_long_joint" value="5" />
-        <joint name="torso_rail_joint" value="0" />
-        <joint name="torso_base_main_joint" value="1.25" />
+        <joint name="torso_rail_joint" value="1.25" />
+        <joint name="torso_base_main_joint" value="0" />
     </group_state>
 
     <group_state name="Gantry_PreGrasp_Left_bins_2" group="Gantry">
-        <joint name="small_long_joint" value="3.10" />
-        <joint name="torso_rail_joint" value="0" />
-        <joint name="torso_base_main_joint" value="1.25" />
+        <joint name="small_long_joint" value="3.60" />
+        <joint name="torso_rail_joint" value="1.75" />
+        <joint name="torso_base_main_joint" value="-1.50" />
     </group_state>
 
     <group_state name="Gantry_PreGrasp_Right_bins_1" group="Gantry">
         <joint name="small_long_joint" value="5" />
-        <joint name="torso_rail_joint" value="0" />
-        <joint name="torso_base_main_joint" value="-1.25" />
+        <joint name="torso_rail_joint" value="-1.25" />
+        <joint name="torso_base_main_joint" value="0" />
     </group_state>
 
     <group_state name="Gantry_PreGrasp_Right_bins_2" group="Gantry">
         <joint name="small_long_joint" value="3.1" />
-        <joint name="torso_rail_joint" value="0" />
-        <joint name="torso_base_main_joint" value="-1.25" />
+        <joint name="torso_rail_joint" value="-1.25" />
+        <joint name="torso_base_main_joint" value="0" />
     </group_state>
 
     <group_state name="Gantry_PreGrasp_shelves" group="Gantry">
         <joint name="small_long_joint" value="-3.75" />
-        <joint name="torso_rail_joint" value="0" />
-        <joint name="torso_base_main_joint" value="-1.50" />
+        <joint name="torso_rail_joint" value="-1.50" />
+        <joint name="torso_base_main_joint" value="0" />
     </group_state>
 
     <group_state name="Gantry_Predrop_AGV_1" group="Gantry">
         <joint name="small_long_joint" value="0" />
-        <joint name="torso_rail_joint" value="0" />
-        <joint name="torso_base_main_joint" value="-6.5" />
+        <joint name="torso_rail_joint" value="-6.5" />
+        <joint name="torso_base_main_joint" value="0" />
     </group_state>
 
     <group_state name="Gantry_Predrop_AGV_2" group="Gantry">
         <joint name="small_long_joint" value="0" />
-        <joint name="torso_rail_joint" value="0" />
-        <joint name="torso_base_main_joint" value="6.5" />
+        <joint name="torso_rail_joint" value="6.5" />
+        <joint name="torso_base_main_joint" value="0" />
     </group_state>
 
     <group_state name="Gantry_PreGrasp_Conv" group="Gantry">
         <joint name="small_long_joint" value="0" />
-        <joint name="torso_rail_joint" value="0" />
-        <joint name="torso_base_main_joint" value="-2.75" />
+        <joint name="torso_rail_joint" value="-2.75" />
+        <joint name="torso_base_main_joint" value="0" />
     </group_state>
 
     <!--END EFFECTOR: Purpose: Represent information about an end effector.-->
