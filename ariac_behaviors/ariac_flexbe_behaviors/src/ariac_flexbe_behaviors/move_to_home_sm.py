@@ -10,6 +10,7 @@
 from flexbe_core import Behavior, Autonomy, OperatableStateMachine, ConcurrencyContainer, PriorityContainer, Logger
 from ariac_flexbe_states.srdf_state_to_moveit_ariac_state import SrdfStateToMoveitAriac
 from flexbe_states.wait_state import WaitState
+from ariac_flexbe_states.GripperEnable import VacuumGripperControlState
 # Additional imports can be added inside the following tags
 # [MANUAL_IMPORT]
 
@@ -44,8 +45,8 @@ class Move_to_HomeSM(Behavior):
 
 
 	def create(self):
-		# x:805 y:349, x:467 y:416
-		_state_machine = OperatableStateMachine(outcomes=['finished', 'failed'])
+		# x:1313 y:161, x:467 y:416
+		_state_machine = OperatableStateMachine(outcomes=['finished', 'failed'], input_keys=['arm_idL', 'arm_idR'], output_keys=['config_name_PreSide', 'config_name_right_arm', 'config_name_left_arm', 'config_name_gantry'])
 		_state_machine.userdata.config_name_gantry = 'Gantry_Home'
 		_state_machine.userdata.move_group_gantry = 'Gantry'
 		_state_machine.userdata.move_group_prefix = '/ariac/gantry'
@@ -56,6 +57,8 @@ class Move_to_HomeSM(Behavior):
 		_state_machine.userdata.config_name_right_arm = 'Right_Home'
 		_state_machine.userdata.move_group_left_arm = 'Left_Arm'
 		_state_machine.userdata.config_name_PreSide = 'Gantry_Pre_Side'
+		_state_machine.userdata.arm_idL = ''
+		_state_machine.userdata.arm_idR = ''
 
 		# Additional creation code can be added inside the following tags
 		# [MANUAL_CREATE]
@@ -93,7 +96,7 @@ class Move_to_HomeSM(Behavior):
 			# x:525 y:149
 			OperatableStateMachine.add('Move_gantry_home',
 										SrdfStateToMoveitAriac(),
-										transitions={'reached': 'finished', 'planning_failed': 'Retry_3', 'control_failed': 'Retry_3', 'param_error': 'failed'},
+										transitions={'reached': 'uitzetten die hap links', 'planning_failed': 'Retry_3', 'control_failed': 'Retry_3', 'param_error': 'failed'},
 										autonomy={'reached': Autonomy.Off, 'planning_failed': Autonomy.Off, 'control_failed': Autonomy.Off, 'param_error': Autonomy.Off},
 										remapping={'config_name': 'config_name_gantry', 'move_group': 'move_group_gantry', 'move_group_prefix': 'move_group_prefix', 'action_topic': 'action_topic', 'robot_name': 'robot_name', 'config_name_out': 'config_name_out', 'move_group_out': 'move_group_out', 'robot_name_out': 'robot_name_out', 'action_topic_out': 'action_topic_out', 'joint_values': 'joint_values', 'joint_names': 'joint_names'})
 
@@ -102,6 +105,20 @@ class Move_to_HomeSM(Behavior):
 										WaitState(wait_time=0.3),
 										transitions={'done': 'Move_gantry_home'},
 										autonomy={'done': Autonomy.Off})
+
+			# x:769 y:133
+			OperatableStateMachine.add('uitzetten die hap links',
+										VacuumGripperControlState(enable=False),
+										transitions={'continue': 'Uitzetten die hap rechts', 'failed': 'failed', 'invalid_arm_id': 'failed'},
+										autonomy={'continue': Autonomy.Off, 'failed': Autonomy.Off, 'invalid_arm_id': Autonomy.Off},
+										remapping={'arm_id': 'arm_idL'})
+
+			# x:1000 y:125
+			OperatableStateMachine.add('Uitzetten die hap rechts',
+										VacuumGripperControlState(enable=False),
+										transitions={'continue': 'finished', 'failed': 'failed', 'invalid_arm_id': 'failed'},
+										autonomy={'continue': Autonomy.Off, 'failed': Autonomy.Off, 'invalid_arm_id': Autonomy.Off},
+										remapping={'arm_id': 'arm_idR'})
 
 
 		return _state_machine
