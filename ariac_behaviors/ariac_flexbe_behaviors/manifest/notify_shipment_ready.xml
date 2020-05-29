@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<behavior name="Notify_shipment_ready">
+
+	<executable package_path="ariac_flexbe_behaviors.notify_shipment_ready_sm" class="Notify_shipment_readySM" />
+	<tagstring></tagstring>
+	<author>Wouter de Saegher, Stefan Roelands</author>
+	<date>Fri May 29 2020</date>
+	<description>
+		Notifies the agv the shipment is ready
+This is a part of the ariac_example.
+	</description>
+
+
+	<!-- Contained Behaviors -->
+
+	<!-- Available Parameters -->
+
+</behavior>

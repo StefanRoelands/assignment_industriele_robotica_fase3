@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<behavior name="SelectorStateLeft">
+
+	<executable package_path="ariac_flexbe_behaviors.selectorstateleft_sm" class="SelectorStateLeftSM" />
+	<tagstring></tagstring>
+	<author>Wouter de Saegher, Stefan Roelands</author>
+	<date>Fri May 29 2020</date>
+	<description>
+		Selecteert de juiste variabelen bij het juiste pad
+	</description>
+
+
+	<!-- Contained Behaviors -->
+
+	<!-- Available Parameters -->
+
+</behavior>

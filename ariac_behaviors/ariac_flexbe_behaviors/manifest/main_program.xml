@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<behavior name="Main_program">
+
+	<executable package_path="ariac_flexbe_behaviors.main_program_sm" class="Main_programSM" />
+	<tagstring></tagstring>
+	<author>Wouter de Saegher, Stefan Roelands</author>
+	<date>Thu May 28 2020</date>
+	<description>
+		Hoofdprogramma van het verwerken van de orders voor de klant
+	</description>
+
+
+	<!-- Contained Behaviors -->
+	<contains name="Notify_shipment_ready" />
+	<contains name="SelectorStateLeft" />
+	<contains name="SelectorStateRight" />
+	<contains name="DropOnAGV" />
+
+	<!-- Available Parameters -->
+
+</behavior>

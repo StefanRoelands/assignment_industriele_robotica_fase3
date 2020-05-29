@@ -15,14 +15,14 @@ class GripperControle(EventState):
 
 	-- target_time 	float 	Time which needs to have passed since the behavior started.
 
-	<= continue 			Given time has passed.
-	<= failed 			Example for a failure outcome.
+	<= Active 			Given time has passed.
+	<= Not_active 			Example for a failure outcome.
 	<= invalid_arm_id		Invalid arm id
 	'''
 
 	def __init__(self):
 		# Declare outcomes, input_keys, and output_keys by calling the super constructor with the corresponding arguments.
-		super(GripperControle, self).__init__(input_keys = ['arm_id'], outcomes = ['continue', 'failed', 'invalid_arm_id'])
+		super(GripperControle, self).__init__(input_keys = ['arm_id'], outcomes = ['Active', 'Not_active', 'invalid_arm_id'])
 
 
 	def execute(self, userdata):
@@ -30,16 +30,16 @@ class GripperControle(EventState):
 		if userdata.arm_id == 'left':
 			status = rospy.wait_for_message('/ariac/gantry/left_arm/gripper/state', VacuumGripperState)
 			if status.attached == True:
-				return 'True'
+				return 'Active'
 			else:
-				return 'False'
+				return 'Not_active'
 
 		elif userdata.arm_id == 'right':
 			status = rospy.wait_for_message('/ariac/gantry/right_arm/gripper/control', VacuumGripperState)
 			if status.attached == True:
-				return 'True'
+				return 'Active'
 			else:
-				return 'False'
+				return 'Not_active'
 		
 
 	def on_enter(self, userdata):
