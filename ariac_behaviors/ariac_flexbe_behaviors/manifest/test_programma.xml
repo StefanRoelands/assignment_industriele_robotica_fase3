@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<behavior name="Test programma">
+
+	<executable package_path="ariac_flexbe_behaviors.test_programma_sm" class="TestprogrammaSM" />
+	<tagstring></tagstring>
+	<author>Stefan Roelands, Wouter de Saegher</author>
+	<date>Tue May 26 2020</date>
+	<description>
+		Testen van het oppakken
+	</description>
+
+
+	<!-- Contained Behaviors -->
+
+	<!-- Available Parameters -->
+
+</behavior>
