@@ -93,7 +93,7 @@ class Move_to_HomeSM(Behavior):
 			# x:525 y:149
 			OperatableStateMachine.add('Move_gantry_home',
 										SrdfStateToMoveitAriac(),
-										transitions={'reached': 'PreGrasp_', 'planning_failed': 'Retry_3', 'control_failed': 'Retry_3', 'param_error': 'failed'},
+										transitions={'reached': 'finished', 'planning_failed': 'Retry_3', 'control_failed': 'Retry_3', 'param_error': 'failed'},
 										autonomy={'reached': Autonomy.Off, 'planning_failed': Autonomy.Off, 'control_failed': Autonomy.Off, 'param_error': Autonomy.Off},
 										remapping={'config_name': 'config_name_gantry', 'move_group': 'move_group_gantry', 'move_group_prefix': 'move_group_prefix', 'action_topic': 'action_topic', 'robot_name': 'robot_name', 'config_name_out': 'config_name_out', 'move_group_out': 'move_group_out', 'robot_name_out': 'robot_name_out', 'action_topic_out': 'action_topic_out', 'joint_values': 'joint_values', 'joint_names': 'joint_names'})
 
@@ -101,19 +101,6 @@ class Move_to_HomeSM(Behavior):
 			OperatableStateMachine.add('Retry_3',
 										WaitState(wait_time=0.3),
 										transitions={'done': 'Move_gantry_home'},
-										autonomy={'done': Autonomy.Off})
-
-			# x:745 y:152
-			OperatableStateMachine.add('PreGrasp_',
-										SrdfStateToMoveitAriac(),
-										transitions={'reached': 'finished', 'planning_failed': 'Retry_4', 'control_failed': 'Retry_4', 'param_error': 'failed'},
-										autonomy={'reached': Autonomy.Off, 'planning_failed': Autonomy.Off, 'control_failed': Autonomy.Off, 'param_error': Autonomy.Off},
-										remapping={'config_name': 'config_name_PreSide', 'move_group': 'move_group_gantry', 'move_group_prefix': 'move_group_prefix', 'action_topic': 'action_topic', 'robot_name': 'robot_name', 'config_name_out': 'config_name_out', 'move_group_out': 'move_group_out', 'robot_name_out': 'robot_name_out', 'action_topic_out': 'action_topic_out', 'joint_values': 'joint_values', 'joint_names': 'joint_names'})
-
-			# x:773 y:27
-			OperatableStateMachine.add('Retry_4',
-										WaitState(wait_time=0.3),
-										transitions={'done': 'PreGrasp_'},
 										autonomy={'done': Autonomy.Off})
 
 
