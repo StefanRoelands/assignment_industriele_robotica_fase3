@@ -16,8 +16,8 @@ class VacuumGripperControlState(EventState):
 	-- target_time 	float 	Time which needs to have passed since the behavior started.
 
 	<= continue 			Given time has passed.
-	<= failed 				Example for a failure outcome.
-
+	<= failed 			Example for a failure outcome.
+	<= invalid_arm_id		Invalid arm id
 	'''
 
 	def __init__(self, enable):
