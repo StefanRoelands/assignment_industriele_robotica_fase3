@@ -54,33 +54,71 @@
         <joint name="torso_base_main_joint" value="0" />
     </group_state>
 
+	<!--Posities Stefan-->
+
+    <group_state name="Left_Home_shelves" group="Left_Arm">
+        <joint name="left_elbow_joint" value="2.5" />
+        <joint name="left_shoulder_lift_joint" value="-1.6" />
+        <joint name="left_shoulder_pan_joint" value="0" />
+        <joint name="left_wrist_1_joint" value="-0.9" />
+        <joint name="left_wrist_2_joint" value="1.50" />
+        <joint name="left_wrist_3_joint" value="0" />
+    </group_state>
+
+    <group_state name="Right_Home_shelves" group="Right_Arm">
+        <joint name="right_elbow_joint" value="2.5" />
+        <joint name="right_shoulder_lift_joint" value="-1.6" />
+        <joint name="right_shoulder_pan_joint" value="3.15" />
+        <joint name="right_wrist_1_joint" value="-0.9" />
+        <joint name="right_wrist_2_joint" value="1.50" />
+        <joint name="right_wrist_3_joint" value="0" />
+    </group_state>
+
     <group_state name="Gantry_Pre_Side" group="Gantry">
-        <joint name="small_long_joint" value="4.07" />
+        <joint name="small_long_joint" value="4" />
         <joint name="torso_rail_joint" value="0" />
         <joint name="torso_base_main_joint" value="0" />
     </group_state>
 
-    <group_state name="Gantry_PreGrasp_Left_bins_1" group="Gantry">
-        <joint name="small_long_joint" value="5" />
-        <joint name="torso_rail_joint" value="1.25" />
+    <group_state name="Gantry_Pre_Side_RAR" group="Gantry">
+        <joint name="small_long_joint" value="4" />
+        <joint name="torso_rail_joint" value="-1.55" />
         <joint name="torso_base_main_joint" value="0" />
     </group_state>
 
-    <group_state name="Gantry_PreGrasp_Left_bins_2" group="Gantry">
+    <group_state name="Gantry_Pre_Side_LAR" group="Gantry">
+        <joint name="small_long_joint" value="4" />
+        <joint name="torso_rail_joint" value="1.55" />
+        <joint name="torso_base_main_joint" value="0" />
+    </group_state>
+
+    <group_state name="Gantry_PreGrasp_Left_bins_RA" group="Gantry">
         <joint name="small_long_joint" value="3.60" />
-        <joint name="torso_rail_joint" value="1.75" />
-        <joint name="torso_base_main_joint" value="-1.50" />
+        <joint name="torso_rail_joint" value="1.70" />
+        <joint name="torso_base_main_joint" value="1.55" />
     </group_state>
 
-    <group_state name="Gantry_PreGrasp_Right_bins_1" group="Gantry">
-        <joint name="small_long_joint" value="5" />
-        <joint name="torso_rail_joint" value="-1.25" />
-        <joint name="torso_base_main_joint" value="0" />
+    <group_state name="Gantry_PreGrasp_Left_bins_LA" group="Gantry">
+        <joint name="small_long_joint" value="3.60" />
+        <joint name="torso_rail_joint" value="1.70" />
+        <joint name="torso_base_main_joint" value="-1.55" />
     </group_state>
 
-    <group_state name="Gantry_PreGrasp_Right_bins_2" group="Gantry">
-        <joint name="small_long_joint" value="3.1" />
-        <joint name="torso_rail_joint" value="-1.25" />
+    <group_state name="Gantry_PreGrasp_Right_bins_RA" group="Gantry">
+        <joint name="small_long_joint" value="4.50" />
+        <joint name="torso_rail_joint" value="-1.70" />
+        <joint name="torso_base_main_joint" value="1.55" />
+    </group_state>
+
+    <group_state name="Gantry_PreGrasp_Right_bins_LA" group="Gantry">
+        <joint name="small_long_joint" value="4.5" />
+        <joint name="torso_rail_joint" value="-1.7" />
+        <joint name="torso_base_main_joint" value="-1.55" />
+    </group_state>
+
+    <group_state name="Gantry_PreGrasp_Pre_shelves" group="Gantry">
+        <joint name="small_long_joint" value="0" />
+        <joint name="torso_rail_joint" value="-1.50" />
         <joint name="torso_base_main_joint" value="0" />
     </group_state>
 
@@ -90,21 +128,59 @@
         <joint name="torso_base_main_joint" value="0" />
     </group_state>
 
-    <group_state name="Gantry_Predrop_AGV_1" group="Gantry">
-        <joint name="small_long_joint" value="0" />
-        <joint name="torso_rail_joint" value="-6.5" />
-        <joint name="torso_base_main_joint" value="0" />
+    <group_state name="Gantry_PreGrasp_shelves_LAR" group="Gantry">
+        <joint name="small_long_joint" value="-3.75" />
+        <joint name="torso_rail_joint" value="-1.50" />
+        <joint name="torso_base_main_joint" value="1.55" />
     </group_state>
 
-    <group_state name="Gantry_Predrop_AGV_2" group="Gantry">
-        <joint name="small_long_joint" value="0" />
-        <joint name="torso_rail_joint" value="6.5" />
-        <joint name="torso_base_main_joint" value="0" />
+    <group_state name="Gantry_PreGrasp_shelves_RAR" group="Gantry">
+        <joint name="small_long_joint" value="-3.75" />
+        <joint name="torso_rail_joint" value="-1.50" />
+        <joint name="torso_base_main_joint" value="-1.55" />
     </group_state>
 
-    <group_state name="Gantry_PreGrasp_Conv" group="Gantry">
+    <group_state name="Gantry_Predrop_AGV_1RA" group="Gantry">
+        <joint name="small_long_joint" value="0" />
+        <joint name="torso_rail_joint" value="-6.25" />
+        <joint name="torso_base_main_joint" value="-1.55" />
+    </group_state>
+
+    <group_state name="Gantry_Predrop_AGV_1LA" group="Gantry">
+        <joint name="small_long_joint" value="0" />
+        <joint name="torso_rail_joint" value="-6.25" />
+        <joint name="torso_base_main_joint" value="1.55" />
+    </group_state>
+
+    <group_state name="Gantry_Predrop_AGV_2RA" group="Gantry">
+        <joint name="small_long_joint" value="0" />
+        <joint name="torso_rail_joint" value="6.25" />
+        <joint name="torso_base_main_joint" value="1.55" />
+    </group_state>
+
+    <group_state name="Gantry_Predrop_AGV_2LA" group="Gantry">
+        <joint name="small_long_joint" value="0" />
+        <joint name="torso_rail_joint" value="6.25" />
+        <joint name="torso_base_main_joint" value="-1.55" />
+    </group_state>
+
+	<!--Posities Wouter-->
+
+    <group_state name="Gantry_PreGrasp_Conv_LA" group="Gantry">
         <joint name="small_long_joint" value="0" />
         <joint name="torso_rail_joint" value="-2.75" />
+        <joint name="torso_base_main_joint" value="1.55" />
+    </group_state>
+
+    <group_state name="Gantry_PreGrasp_Conv_RA" group="Gantry">
+        <joint name="small_long_joint" value="0" />
+        <joint name="torso_rail_joint" value="-2.75" />
+        <joint name="torso_base_main_joint" value="-1.55" />
+    </group_state>
+
+    <group_state name="Gantry_PreGrasp_Right_bins_2" group="Gantry">
+        <joint name="small_long_joint" value="3.1" />
+        <joint name="torso_rail_joint" value="-1.25" />
         <joint name="torso_base_main_joint" value="0" />
     </group_state>
 
