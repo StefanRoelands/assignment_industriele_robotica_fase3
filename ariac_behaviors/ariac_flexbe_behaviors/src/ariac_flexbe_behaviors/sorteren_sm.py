@@ -10,12 +10,11 @@
 from flexbe_core import Behavior, Autonomy, OperatableStateMachine, ConcurrencyContainer, PriorityContainer, Logger
 from ariac_flexbe_states.start_assignment_state import StartAssignment
 from ariac_flexbe_behaviors.move_to_home_sm import Move_to_HomeSM
-from ariac_flexbe_states.srdf_state_to_moveit_ariac_state import SrdfStateToMoveitAriac
-from flexbe_states.wait_state import WaitState
 from ariac_support_flexbe_states.equal_state import EqualState
 from ariac_support_flexbe_states.add_numeric_state import AddNumericState
 from ariac_flexbe_states.set_conveyorbelt_power_state import SetConveyorbeltPowerState
 from ariac_flexbe_behaviors.oppakken_sm import OppakkenSM
+from ariac_flexbe_behaviors.droppen_sm import DroppenSM
 # Additional imports can be added inside the following tags
 # [MANUAL_IMPORT]
 
@@ -41,6 +40,7 @@ class SorterenSM(Behavior):
 		# references to used behaviors
 		self.add_behavior(Move_to_HomeSM, 'Move_to_Home')
 		self.add_behavior(OppakkenSM, 'Oppakken')
+		self.add_behavior(DroppenSM, 'Droppen')
 
 		# Additional initialization code can be added inside the following tags
 		# [MANUAL_INIT]
@@ -54,15 +54,14 @@ class SorterenSM(Behavior):
 	def create(self):
 		# x:1648 y:487, x:394 y:242
 		_state_machine = OperatableStateMachine(outcomes=['finished', 'failed'])
-		_state_machine.userdata.config_name_gantry_Pre_Conv = 'Gantry_PreGrasp_Conv_LA'
+		_state_machine.userdata.config_name_gantry_Pre_Conv_LA = 'Gantry_PreGrasp_Conv_LA'
 		_state_machine.userdata.move_group_gantry = 'Gantry'
 		_state_machine.userdata.move_group_prefix = '/ariac/gantry'
 		_state_machine.userdata.action_topic = '/move_group'
 		_state_machine.userdata.robot_name = ''
 		_state_machine.userdata.poweroff = 0
-		_state_machine.userdata.config_name_gantry_Pre_Grasp_bin = 'Gantry_PreGrasp_Right_bins_2'
 		_state_machine.userdata.Partsaantal = 0
-		_state_machine.userdata.Partsvast = 6
+		_state_machine.userdata.Partsvast = 3
 		_state_machine.userdata.Plus1 = 1
 		_state_machine.userdata.poweron = 100
 		_state_machine.userdata.ref_frame = 'world'
@@ -76,6 +75,9 @@ class SorterenSM(Behavior):
 		_state_machine.userdata.arm_idR = 'right'
 		_state_machine.userdata.config_name_Left_Home = ''
 		_state_machine.userdata.config_name_Right_Home = ''
+		_state_machine.userdata.config_name_gantry_Pre_Conv_RA = 'Gantry_PreGrasp_Conv_RA'
+		_state_machine.userdata.config_name_RA_pre = 'config_name_RA_pre'
+		_state_machine.userdata.config_name_LA_pre = 'config_name_LA_pre'
 
 		# Additional creation code can be added inside the following tags
 		# [MANUAL_CREATE]
@@ -95,29 +97,10 @@ class SorterenSM(Behavior):
 										self.use_behavior(Move_to_HomeSM, 'Move_to_Home'),
 										transitions={'finished': 'Oppakken', 'failed': 'failed'},
 										autonomy={'finished': Autonomy.Inherit, 'failed': Autonomy.Inherit},
-										remapping={'config_name_PreSide': 'config_name_PreSide', 'config_name_right_arm': 'config_name_right_arm', 'config_name_left_arm': 'config_name_left_arm', 'config_name_gantry': 'config_name_gantry'})
-
-			# x:1040 y:126
-			OperatableStateMachine.add('Move to pre side',
-										SrdfStateToMoveitAriac(),
-										transitions={'reached': 'Hier moet een behavior om te plaatsen', 'planning_failed': 'retry_2', 'control_failed': 'retry_2', 'param_error': 'failed'},
-										autonomy={'reached': Autonomy.Off, 'planning_failed': Autonomy.Off, 'control_failed': Autonomy.Off, 'param_error': Autonomy.Off},
-										remapping={'config_name': 'config_name_gantry_Pre_Grasp_bin', 'move_group': 'move_group_gantry', 'move_group_prefix': 'move_group_prefix', 'action_topic': 'action_topic', 'robot_name': 'robot_name', 'config_name_out': 'config_name_out', 'move_group_out': 'move_group_out', 'robot_name_out': 'robot_name_out', 'action_topic_out': 'action_topic_out', 'joint_values': 'joint_values', 'joint_names': 'joint_names'})
-
-			# x:1034 y:271
-			OperatableStateMachine.add('retry_2',
-										WaitState(wait_time=0.2),
-										transitions={'done': 'Move to pre side'},
-										autonomy={'done': Autonomy.Off})
-
-			# x:1278 y:109
-			OperatableStateMachine.add('Hier moet een behavior om te plaatsen',
-										WaitState(wait_time=2),
-										transitions={'done': 'increase'},
-										autonomy={'done': Autonomy.Off})
+										remapping={'arm_idL': 'arm_idL', 'arm_idR': 'arm_idR', 'config_name_PreSide': 'config_name_PreSide', 'config_name_Right_Home': 'config_name_Right_Home', 'config_name_Left_Home': 'config_name_Left_Home', 'config_name_gantry': 'config_name_gantry'})
 
 			# x:977 y:473
-			OperatableStateMachine.add('6 parts?',
+			OperatableStateMachine.add('3 parts?',
 										EqualState(),
 										transitions={'true': 'finished', 'false': 'Start conveyer'},
 										autonomy={'true': Autonomy.Off, 'false': Autonomy.Off},
@@ -126,23 +109,30 @@ class SorterenSM(Behavior):
 			# x:1233 y:370
 			OperatableStateMachine.add('increase',
 										AddNumericState(),
-										transitions={'done': '6 parts?'},
+										transitions={'done': '3 parts?'},
 										autonomy={'done': Autonomy.Off},
 										remapping={'value_a': 'Plus1', 'value_b': 'Partsaantal', 'result': 'Partsaantal'})
 
-			# x:682 y:223
+			# x:601 y:399
 			OperatableStateMachine.add('Start conveyer',
 										SetConveyorbeltPowerState(),
 										transitions={'continue': 'Oppakken', 'fail': 'failed'},
 										autonomy={'continue': Autonomy.Off, 'fail': Autonomy.Off},
 										remapping={'power': 'poweron'})
 
-			# x:1009 y:31
+			# x:823 y:35
 			OperatableStateMachine.add('Oppakken',
 										self.use_behavior(OppakkenSM, 'Oppakken'),
-										transitions={'finished': 'Move to pre side', 'failed': 'failed'},
+										transitions={'finished': 'Droppen', 'failed': 'failed'},
 										autonomy={'finished': Autonomy.Inherit, 'failed': Autonomy.Inherit},
-										remapping={'part': 'part', 'pose': 'pose', 'move_group_prefix': 'move_group_prefix', 'move_group_right_arm': 'move_group_right_arm', 'move_group_left_arm': 'move_group_left_arm', 'action_topic': 'action_topic', 'camera_frame': 'camera_frame', 'camera_topic': 'camera_topic', 'poweroff': 'poweroff', 'ref_frame': 'ref_frame', 'config_name_gantry_Pre_Conv': 'config_name_gantry_Pre_Conv', 'move_group_gantry': 'move_group_gantry', 'robot_name': 'robot_name', 'config_name_Left_Home': 'config_name_Left_Home', 'config_name_Right_Home': 'config_name_Right_Home', 'arm_idL': 'arm_idL', 'arm_idR': 'arm_idR'})
+										remapping={'part': 'part', 'pose': 'pose', 'move_group_prefix': 'move_group_prefix', 'move_group_right_arm': 'move_group_right_arm', 'move_group_left_arm': 'move_group_left_arm', 'action_topic': 'action_topic', 'camera_frame': 'camera_frame', 'camera_topic': 'camera_topic', 'poweroff': 'poweroff', 'ref_frame': 'ref_frame', 'move_group_gantry': 'move_group_gantry', 'robot_name': 'robot_name', 'config_name_Left_Home': 'config_name_Left_Home', 'config_name_Right_Home': 'config_name_Right_Home', 'arm_idL': 'arm_idL', 'arm_idR': 'arm_idR', 'config_name_gantry_Pre_Conv_RA': 'config_name_gantry_Pre_Conv_RA', 'config_name_gantry_Pre_Conv_LA': 'config_name_gantry_Pre_Conv_LA', 'config_name_RA_pre': 'config_name_RA_pre', 'config_name_LA_pre': 'config_name_LA_pre', 'offset_var_left': 'offset_var_left', 'offset_var_right': 'offset_var_right', 'offset_gasket': 'offset_gasket', 'offset_piston': 'offset_piston'})
+
+			# x:1314 y:156
+			OperatableStateMachine.add('Droppen',
+										self.use_behavior(DroppenSM, 'Droppen'),
+										transitions={'finished': 'increase', 'failed': 'failed', 'end': 'finished'},
+										autonomy={'finished': Autonomy.Inherit, 'failed': Autonomy.Inherit, 'end': Autonomy.Inherit},
+										remapping={'move_group_prefix': 'move_group_prefix', 'move_group_right_arm': 'move_group_right_arm', 'move_group_left_arm': 'move_group_left_arm', 'action_topic': 'action_topic', 'camera_frame': 'camera_frame', 'camera_topic': 'camera_topic', 'ref_frame': 'ref_frame', 'move_group_gantry': 'move_group_gantry', 'robot_name': 'robot_name', 'offset_var_left': 'offset_var_left', 'offset_var_right': 'offset_var_right', 'offset_gasket': 'offset_gasket', 'offset_piston': 'offset_piston', 'arm_idL': 'arm_idL', 'arm_idR': 'arm_idR', 'config_name_Right_Home': 'config_name_Right_Home', 'config_name_Left_Home': 'config_name_Left_Home', 'config_name_RA_pre': 'config_name_RA_pre', 'config_name_LA_pre': 'config_name_LA_pre'})
 
 
 		return _state_machine
