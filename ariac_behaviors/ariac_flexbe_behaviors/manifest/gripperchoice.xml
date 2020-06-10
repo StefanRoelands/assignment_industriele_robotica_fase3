@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<behavior name="GripperChoice">
+
+	<executable package_path="ariac_flexbe_behaviors.gripperchoice_sm" class="GripperChoiceSM" />
+	<tagstring></tagstring>
+	<author>Wouter de Saegher, Stefan Roelands</author>
+	<date>Fri May 29 2020</date>
+	<description>
+		Gripper keuze maken en plaatsen op de AGV
+	</description>
+
+
+	<!-- Contained Behaviors -->
+	<contains name="SelectorStateLeft" />
+	<contains name="SelectorStateRight" />
+	<contains name="AgvSelector" />
+
+	<!-- Available Parameters -->
+
+</behavior>

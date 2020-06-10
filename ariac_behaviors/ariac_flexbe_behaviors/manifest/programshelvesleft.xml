@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<behavior name="ProgramShelvesLeft">
+
+	<executable package_path="ariac_flexbe_behaviors.programshelvesleft_sm" class="ProgramShelvesLeftSM" />
+	<tagstring></tagstring>
+	<author>Stefan Roelands, Wouter de Saegher</author>
+	<date>Tue May 26 2020</date>
+	<description>
+		Oppakken van de producten uit de shelves met de linker arm
+	</description>
+
+
+	<!-- Contained Behaviors -->
+
+	<!-- Available Parameters -->
+
+</behavior>

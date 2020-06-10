@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<behavior name="DropOnAGV">
+
+	<executable package_path="ariac_flexbe_behaviors.droponagv_sm" class="DropOnAGVSM" />
+	<tagstring></tagstring>
+	<author>Wouter de Saegher, Stefan Roelands</author>
+	<date>Fri May 29 2020</date>
+	<description>
+		Droppen van de producten op de juiste AGV
+	</description>
+
+
+	<!-- Contained Behaviors -->
+
+	<!-- Available Parameters -->
+
+</behavior>

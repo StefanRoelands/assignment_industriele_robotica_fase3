@@ -12,6 +12,8 @@
 
 
 	<!-- Contained Behaviors -->
+	<contains name="ProgramBinsRight" />
+	<contains name="ProgramShelvesRight" />
 
 	<!-- Available Parameters -->
 

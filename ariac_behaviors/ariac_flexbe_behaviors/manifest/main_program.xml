@@ -13,9 +13,7 @@
 
 	<!-- Contained Behaviors -->
 	<contains name="Notify_shipment_ready" />
-	<contains name="SelectorStateLeft" />
-	<contains name="SelectorStateRight" />
-	<contains name="DropOnAGV" />
+	<contains name="GripperChoice" />
 
 	<!-- Available Parameters -->
 

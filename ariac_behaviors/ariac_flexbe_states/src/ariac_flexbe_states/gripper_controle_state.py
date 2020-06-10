@@ -15,8 +15,8 @@ class GripperControle(EventState):
 
 	-- target_time 	float 	Time which needs to have passed since the behavior started.
 
-	<= Active 			Given time has passed.
-	<= Not_active 			Example for a failure outcome.
+	<= Active 			The gripper holds a product.
+	<= Not_active 			The gripper doesn't hold a product.
 	<= invalid_arm_id		Invalid arm id
 	'''
 
@@ -35,7 +35,7 @@ class GripperControle(EventState):
 				return 'Not_active'
 
 		elif userdata.arm_id == 'right':
-			status = rospy.wait_for_message('/ariac/gantry/right_arm/gripper/control', VacuumGripperState)
+			status = rospy.wait_for_message('/ariac/gantry/right_arm/gripper/state', VacuumGripperState)
 			if status.attached == True:
 				return 'Active'
 			else:

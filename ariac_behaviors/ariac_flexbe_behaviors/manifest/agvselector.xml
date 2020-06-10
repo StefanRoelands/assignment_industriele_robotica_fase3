@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<behavior name="AgvSelector">
+
+	<executable package_path="ariac_flexbe_behaviors.agvselector_sm" class="AgvSelectorSM" />
+	<tagstring></tagstring>
+	<author>Wouter de Saegher, Stefan Roelands</author>
+	<date>Fri May 29 2020</date>
+	<description>
+		Kiezen van de juiste AGV en de PreDrops
+	</description>
+
+
+	<!-- Contained Behaviors -->
+	<contains name="DropOnAGV" />
+	<contains name="DropOnAGV2" />
+
+	<!-- Available Parameters -->
+
+</behavior>

@@ -48,7 +48,7 @@ This is a part of the ariac_example.
 
 	def create(self):
 		# x:637 y:218, x:137 y:252
-		_state_machine = OperatableStateMachine(outcomes=['finished', 'failed'])
+		_state_machine = OperatableStateMachine(outcomes=['finished', 'failed'], input_keys=['shipment_type', 'agv_id'])
 		_state_machine.userdata.agv_id = ''
 		_state_machine.userdata.shipment_type = ''
 		_state_machine.userdata.succes = 0

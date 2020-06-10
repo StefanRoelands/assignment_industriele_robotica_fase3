@@ -57,19 +57,19 @@
 	<!--Posities Stefan-->
 
     <group_state name="Left_Home_shelves" group="Left_Arm">
-        <joint name="left_elbow_joint" value="2.5" />
-        <joint name="left_shoulder_lift_joint" value="-1.6" />
+        <joint name="left_elbow_joint" value="2.25" />
+        <joint name="left_shoulder_lift_joint" value="-2.25" />
         <joint name="left_shoulder_pan_joint" value="0" />
-        <joint name="left_wrist_1_joint" value="-0.9" />
+        <joint name="left_wrist_1_joint" value="0" />
         <joint name="left_wrist_2_joint" value="1.50" />
         <joint name="left_wrist_3_joint" value="0" />
     </group_state>
 
     <group_state name="Right_Home_shelves" group="Right_Arm">
-        <joint name="right_elbow_joint" value="2.5" />
-        <joint name="right_shoulder_lift_joint" value="-1.6" />
+        <joint name="right_elbow_joint" value="2.25" />
+        <joint name="right_shoulder_lift_joint" value="-2.25" />
         <joint name="right_shoulder_pan_joint" value="3.15" />
-        <joint name="right_wrist_1_joint" value="-0.9" />
+        <joint name="right_wrist_1_joint" value="0" />
         <joint name="right_wrist_2_joint" value="1.50" />
         <joint name="right_wrist_3_joint" value="0" />
     </group_state>
@@ -95,13 +95,13 @@
     <group_state name="Gantry_PreGrasp_Left_bins_RA" group="Gantry">
         <joint name="small_long_joint" value="3.60" />
         <joint name="torso_rail_joint" value="1.70" />
-        <joint name="torso_base_main_joint" value="1.55" />
+        <joint name="torso_base_main_joint" value="1.15" />
     </group_state>
 
     <group_state name="Gantry_PreGrasp_Left_bins_LA" group="Gantry">
         <joint name="small_long_joint" value="3.60" />
         <joint name="torso_rail_joint" value="1.70" />
-        <joint name="torso_base_main_joint" value="-1.55" />
+        <joint name="torso_base_main_joint" value="-1.95" />
     </group_state>
 
     <group_state name="Gantry_PreGrasp_Right_bins_RA" group="Gantry">
@@ -169,19 +169,43 @@
     <group_state name="Gantry_PreGrasp_Conv_LA" group="Gantry">
         <joint name="small_long_joint" value="0" />
         <joint name="torso_rail_joint" value="-2.25" />
-        <joint name="torso_base_main_joint" value="1.55" />
+        <joint name="torso_base_main_joint" value="1.30" />
     </group_state>
 
     <group_state name="Gantry_PreGrasp_Conv_RA" group="Gantry">
         <joint name="small_long_joint" value="0" />
         <joint name="torso_rail_joint" value="-2.25" />
-        <joint name="torso_base_main_joint" value="-1.55" />
+        <joint name="torso_base_main_joint" value="-1.80" />
     </group_state>
 
-    <group_state name="Gantry_PreGrasp_Right_bins_2" group="Gantry">
-        <joint name="small_long_joint" value="3.1" />
+    <group_state name="Gantry_PreGrasp_R_bin1" group="Gantry">
+        <joint name="small_long_joint" value="3.125" />
         <joint name="torso_rail_joint" value="-1.25" />
         <joint name="torso_base_main_joint" value="0" />
+    </group_state>
+
+    <group_state name="Gantry_PreGrasp_L_bin1" group="Gantry">
+        <joint name="small_long_joint" value="3.125" />
+        <joint name="torso_rail_joint" value="-1.25" />
+        <joint name="torso_base_main_joint" value="3" />
+    </group_state>
+
+    <group_state name="config_name_LA_pre" group="Left_Arm">
+        <joint name="left_elbow_joint" value="1.52" />
+        <joint name="left_shoulder_lift_joint" value="-1.0" />
+        <joint name="left_shoulder_pan_joint" value="0" />
+        <joint name="left_wrist_1_joint" value="-0.52" />
+        <joint name="left_wrist_2_joint" value="1.55" />
+        <joint name="left_wrist_3_joint" value="0" />
+    </group_state>
+
+    <group_state name="config_name_RA_pre" group="Right_Arm">
+        <joint name="right_elbow_joint" value="1.52" />
+        <joint name="right_shoulder_lift_joint" value="-1.0" />
+        <joint name="right_shoulder_pan_joint" value="3.15" />
+        <joint name="right_wrist_1_joint" value="-0.52" />
+        <joint name="right_wrist_2_joint" value="1.55" />
+        <joint name="right_wrist_3_joint" value="0" />
     </group_state>
 
     <!--END EFFECTOR: Purpose: Represent information about an end effector.-->
